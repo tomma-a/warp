@@ -326,16 +326,16 @@ unittest
 
     ubyte[6] d = cast(ubyte[])("" ~ ESC.space ~ " a " ~ ESC.space ~ " ");
     s = trimWhiteSpace(cast(uchar[])d);
-    assert(s == x"FD 61 FD");
+    assert(s == std.conv.hexString!"FD 61 FD");
 
     ubyte[1] e = cast(ubyte[])("" ~ ESC.space ~ "");
     s = trimWhiteSpace(cast(uchar[])e);
-    assert(s == x"FD");
+    assert(s == std.conv.hexString!"FD");
 
     ubyte[8] f = cast(ubyte[])("" ~ ESC.space ~ " ab " ~ ESC.space ~ "" ~ ESC.space ~ " ");
     s = trimWhiteSpace(cast(uchar[])f);
 //writefln("'%s', %s", s, s.length);
-    assert(s == x"FD 61 62 FD FD");
+    assert(s == std.conv.hexString!"FD 61 62 FD FD");
 
 }
 

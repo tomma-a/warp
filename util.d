@@ -1,3 +1,4 @@
+module util;
 import std.stdio;
 import std.array;
 import std.format;
@@ -16,8 +17,10 @@ void err_fatal(T...)(T args)
 }
 
 void err_warning(T...)(Loc loc, T args)
-{
-    loc.write(&stderr);
+{ 
+    File f;
+	f.fdopen(2,"w");
+    loc.write(&(f));
     stderr.write("warning: ");
     stderr.writefln(args);
 }

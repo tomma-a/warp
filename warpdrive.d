@@ -26,9 +26,9 @@ version (gcc4_7_1) {
   version = gnu;
   import defines_gcc4_7_1, defines_gxx4_7_1;
 }
-version (gcc4_8_1) {
+version (gcc4_8_5) {
   version = gnu;
-  import defines_gcc4_8_1, defines_gxx4_8_1;
+  import defines_gcc4_8_5, defines_gxx4_8_5;
 }
 version (clang3_2) {
   version = clang;

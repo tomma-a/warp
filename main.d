@@ -58,6 +58,7 @@ else
                 if (context.doDeps)
                     context.deps ~= srcFilename;
 
+		import std.file;
                 scope(failure) if (!params.stdout) std.file.remove(outFilename);
 
                 auto fout = params.stdout ? stdout : File(outFilename, "wb");
@@ -91,7 +92,9 @@ else
             if (printedFrom) {
                 stderr.writeln(":");
             }
-            context.loc().write(&stderr);
+	    File f;
+		f.fdopen(2,"w");
+            context.loc().write(&f);
             stderr.writeln(e.msg);
             exit(EXIT_FAILURE);
         }

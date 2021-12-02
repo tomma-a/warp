@@ -11,7 +11,7 @@ ifeq (gdc,$(notdir $(DC)))
 	OFSYNTAX=-o
 else
 ifeq (dmd,$(notdir $(DC)))
-	DFLAGS=-c -O -inline -release
+	DFLAGS= -O -inline -release
 	OFSYNTAX=-of
 else
     $(error Unsupported compiler: $(DC))
@@ -23,12 +23,12 @@ CXX=c++
 CFLAGS=
 CXXFLAGS=
 WARPDRIVE=warpdrive
-GENERATED_DEFINES=generated_defines.d
+GENERATED_DEFINES=defines_gcc4_8_5.d defines_gxx4_8_5.d
 
 # warp sources
 SRCS=cmdline.d constexpr.d context.d directive.d expanded.d file.d \
 id.d lexer.d loc.d macros.d main.d number.d outdeps.d ranges.d skip.d \
-sources.d stringlit.d textbuf.d charclass.d
+sources.d stringlit.d textbuf.d charclass.d util.d
 
 # Binaries generated
 BIN:=warp $(WARPDRIVE)
@@ -40,15 +40,9 @@ all : $(BIN)
 clean :
 	rm -rf $(BIN) $(addsuffix .o, $(BIN)) $(GENERATED_DEFINES)
 
-warp.o : $(SRCS)
+warp : $(SRCS)
 	$(DC) $(DFLAGS) $(OFSYNTAX)$@ $(SRCS)
 
-warp : warp.o
-	gcc -m64 -Bthird-party2/binutils/2.21.1/centos6-native/da39a3e/bin/gold -Bthird-party2/glibc/2.17/gcc-4.8.1-glibc-2.17-fb/99df8fc/lib -L/home/aalexandre/bin/../d/phobos/generated/linux/release/default -l:libphobos2.a -lpthread -lm -lrt -o $@ $^
-
 $(WARPDRIVE) : warpdrive.d $(GENERATED_DEFINES)
-	$(DC) $(DFLAGS) $(OFSYNTAX)$@ $^
+	$(DC) -version=gcc4_8_5 $(DFLAGS) $(OFSYNTAX)$@ $^
 
-$(GENERATED_DEFINES) :
-	./builtin_defines.sh '$(CC) $(CFLAGS)' '$(CXX) $(CXXFLAGS)' >$@.tmp
-	mv $@.tmp $@

@@ -58,7 +58,7 @@ struct Loc
     /**********************************************
      * Write out current location to File*
      */
-    void write(File* f)
+    void write(File *f)
     {
         //writefln("%s(%s) %s", fileName, lineNumber, system);
         if (srcFile)
