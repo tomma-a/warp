@@ -30,7 +30,7 @@ immutable ubyte[256] cclassTable;
  * Characters that make up the start of an identifier.
  */
 
-static this()
+shared static this()
 {
     for (uint c = 0; c < 0x100; ++c)
     {

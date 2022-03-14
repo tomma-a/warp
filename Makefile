@@ -11,7 +11,8 @@ ifeq (gdc,$(notdir $(DC)))
 	OFSYNTAX=-o
 else
 ifeq (dmd,$(notdir $(DC)))
-	DFLAGS= -O -inline -release
+	#DFLAGS= -O -inline -release
+	DFLAGS= -inline -debug
 	OFSYNTAX=-of
 else
     $(error Unsupported compiler: $(DC))

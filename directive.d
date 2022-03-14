@@ -371,8 +371,8 @@ bool parseDirective(R)(ref R r)
                 case "define":
                 {
                     // Turn off expanded output so this line is not emitted
-                    r.src.expanded.off();
-                    r.src.expanded.eraseLine();
+                    //r.src.expanded.off();
+                    //r.src.expanded.eraseLine();
 
                     r.popFrontNoExpand();
                     assert(!r.empty);
@@ -423,7 +423,7 @@ bool parseDirective(R)(ref R r)
                         else
                             err_fatal("redefinition of macro %s", cast(string)macid);
                     }
-                    r.src.expanded.on();
+                    //r.src.expanded.on();
                     r.src.expanded.put(r.src.front);
                     r.front = TOK.eol;
                     return true;
@@ -659,8 +659,9 @@ bool parseDirective(R)(ref R r)
 
                 case "include":
                 {
+			return true;
                     // Things to know about the file doing the #include'ing
-                    string currentFile;         // file name
+                 /*   string currentFile;         // file name
                     int pathIndex;              // path index
                     Sys system;                 // is it a system file
 
@@ -732,6 +733,7 @@ bool parseDirective(R)(ref R r)
                     r.src.expanded.on();
                     r.popFront();
                     return false;
+		*/
                 }
 
                 default:

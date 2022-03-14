@@ -873,7 +873,7 @@ void macroExpandedText(Context, R)(Id* m, ustring[] args, ref R buffer)
 private enum EXPAND : ubyte { none, doublequote, singlequote, expand, zero, dot, digit, idstart }
 private immutable EXPAND[256] expand;
 
-static this()
+shared static this()
 {
     // Initialize lookup table
     foreach (uint u; 0 .. 256)
