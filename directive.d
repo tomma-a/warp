@@ -737,6 +737,11 @@ bool parseDirective(R)(ref R r)
                 }
 
                 default:
+			 auto csf=r.src.currentSourceFile();
+		    if(csf) {
+			auto loc=csf.loc;
+		    err_fatal("File: %s,  Line:%d\n",loc.fileName,loc.lineNumber);
+			}
                     err_fatal("unrecognized preprocessing directive #%s", cast(string)id);
                     r.popFront();
                     return true;
